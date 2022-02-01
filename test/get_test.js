@@ -5,6 +5,7 @@ chai.use(require('chai-json-schema'));
 
 
 describe("\GET", function () {
+  
   it("Verify that the status code is 200", async function () {
     const response = await request.get("/api/planets/3/");
     expect(response.status).to.eql(200);
@@ -18,13 +19,14 @@ describe("\GET", function () {
     expect(response.header.allow).to.contain("GET");
   });
 
-  // it("Verify the response data", async function () {
-  //   const response = await request.get("/api/planets/3/");
-  //   expect(response.header.server).to.eql("nginx/1.16.1");
-  //   expect(response.header.connection).to.eql("close");
-  //   expect(response.header.etag).to.eql("\"ccbca9ad5dbcc6c73413df0765660c26\"");
-  //   expect(response.header.allow).to.contain("GET");
-  // });
+  it("Verify the response data", async function () {
+    const response = await request.get("/api/planets/3/");
+    expect(response._body.name).to.eql("Yavin IV");
+    expect(response._body.climate).to.contain("tropical");
+    expect(response._body.diameter).to.eql("10200");
+    expect(response._body.residents).to.be.empty;
+    expect(response._body.films).to.be.not.empty;
+  });
 
   it("Verify JSON schema", async function () {
     const response = await request.get("/api/planets/3/");

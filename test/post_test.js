@@ -7,8 +7,8 @@ describe("\POST", function () {
     expect(response.status).to.eql(405);
   });
 
-//   it("Verify the response message equals \"Method 'POST' not allowed.\"", async function () {
-//     const response = await request.get("/api/planets/3/");
-//     expect(response._body.detail).to.eql("Method 'POST' not allowed.");
-//   });
+  it("Verify the response message equals \"Method 'POST' not allowed.\"", async function () {
+    const response = await request.post("/api/planets/3/");
+    expect(response._body.detail).to.eql("Method 'POST' not allowed.");
+  });
 });
